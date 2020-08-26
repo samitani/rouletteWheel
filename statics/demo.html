@@ -3,22 +3,24 @@
 <head>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="jquery-ui.min.js"></script>
-    <script type="text/javascript" src="src/rouletteWheel.js"></script>
+    <script type="text/javascript" src="rouletteWheel.js"></script>
     <script type="text/javascript">
         $(function(){
+            var urlParams = new URLSearchParams(window.location.search);
 
-            var itemsToShow = parseInt(4 + Math.random()*10);
-            console.log(itemsToShow);
+            var items = []
 
-            var items = {};
-            for(var i=0; i < itemsToShow; i++){
-                items[i] = 'ITEM ' + (i+1);
+            // Reject HTML Tags
+            if (urlParams.get('item').indexOf('>') != -1 ||
+                urlParams.get('item').indexOf('<') != -1) {
+                items = ['INVALID'];
+            } else {
+                items = urlParams.get('item').split(',');
             }
 
             $('#canvas').rouletteWheel({
               items : items,
               selected : function(key, value){
-                alert('SELECTED : ' + key + ' => ' + value);
               },
               spinText : 'Click Me',
             });
