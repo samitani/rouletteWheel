@@ -4,6 +4,14 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="jquery-ui.min.js"></script>
     <script type="text/javascript" src="rouletteWheel.js"></script>
+   <title></title>
+</head>
+<body>
+
+    <div class="wrapper" style="width: 100%; height: 100%">
+    <canvas id="canvas"></canvas>
+    </div>
+
     <script type="text/javascript">
         $(function(){
             var urlParams = new URLSearchParams(window.location.search);
@@ -18,20 +26,18 @@
                 items = urlParams.get('item').split(',');
             }
 
+            $('#canvas').attr('width', $(window).width() * 0.9);
+            $('#canvas').attr('height', $(window).height() * 0.9);
             $('#canvas').rouletteWheel({
-              items : items,
-              selected : function(key, value){
-              },
-              spinText : 'Click Me',
+                items : items,
+                selected : function(key, value){
+                },
+                spinText : 'Click Me',
             });
 
         });
     </script>
-    <title></title>
-</head>
-<body>
-
-    <canvas id="canvas" width="500" height="500"></canvas>
+ 
     
 </body>
 </html>
